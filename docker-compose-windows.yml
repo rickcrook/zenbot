@@ -1,7 +1,8 @@
 server:
   build: .
   volumes:
-    - ./conf.js:/app/conf.js
+    - .:/app
+    - /app/node_modules
   links:
     - mongodb
   command: ./zenbot.sh trade --paper
@@ -16,5 +17,5 @@ mongodb:
 mongodb-data:
   image: mongo:latest
   volumes:
-    - ./data/db:/data/db
+    - /data/db
   command: "true"

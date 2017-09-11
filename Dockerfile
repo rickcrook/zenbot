@@ -1,8 +1,11 @@
-FROM node:latest
+FROM node:boron
 
-ADD . /app
+RUN mkdir -p /app
 WORKDIR /app
 
-RUN npm install
+COPY package.json /app/
+RUN npm install -g node-gyp && npm install --unsafe-perm
 
-EXPOSE 3013
+COPY . /app
+
+CMD [ "./zenbot.sh", "trade", "--paper" ]
